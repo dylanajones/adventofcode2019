@@ -1,5 +1,6 @@
 import math
 
+# Given a mass calculate the fuel needed
 def calFuel(mass):
 	return math.floor(mass / 3) - 2
 
@@ -16,6 +17,7 @@ if __name__ == '__main__':
 		fuel_total += fuel
 		ex_fuel = calFuel(fuel)
 
+		# Calculate the fuel needed for the fuel
 		while ex_fuel > 0:
 			fuel_total += ex_fuel
 			ex_fuel = calFuel(ex_fuel)
