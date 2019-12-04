@@ -4,6 +4,16 @@ def betweenPoints(p, p1, p2):
 
 	return ((p1[0] <= p[0] <= p2[0]) or (p2[0] <= p[0] <= p1[0])) and ((p1[1] <= p[1] <= p2[1]) or (p2[1] <= p[1] <= p1[1]))
 
+def stepDist(coords):
+
+	d = 0
+
+	for i, c in enumerate(coords[:-1]):
+
+		d += abs(c[0] - coords[i+1][0]) + abs(c[1] - coords[i+1][1])
+
+	return d
+
 if __name__ == '__main__':
 
 	f = open('input.txt', 'r')
@@ -40,6 +50,7 @@ if __name__ == '__main__':
 	# Now need to go through and convert into lines so we can compute intersections
 
 	int_dist = float('inf')
+	step_dist = float('inf')
 
 	wires_lines = []
 
@@ -84,8 +95,20 @@ if __name__ == '__main__':
 								if abs(p[0]) + abs(p[1]) < int_dist:
 									int_dist = abs(p[0]) + abs(p[1])
 
+								w1 = [x for x in wires_cord[j][:k+1]]
+								w1.append(p)
+								w2 = [x for x in wires_cord[i][:n+1]]
+								w2.append(p)
+
+								step_w1 = stepDist(w1)
+								step_w2 = stepDist(w2)
+
+								if step_w1 + step_w2 < step_dist:
+									step_dist = step_w1 + step_w2
+
 
 	print int_dist
+	print step_dist
 
 
 
